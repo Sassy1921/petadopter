@@ -1,3 +1,4 @@
+from tkinter import CASCADE
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser , BaseUserManager
 
@@ -74,4 +75,3 @@ class Account(AbstractBaseUser):
    
     def has_module_perms(self,app_label):
         return True
-
