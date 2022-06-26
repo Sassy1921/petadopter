@@ -1,0 +1,170 @@
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- swiper CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+    <style>
+      @import url("https://fonts.googleapis.com/css?family=Josefin+Sans|Mountains+of+Christmas&display=swap");
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          list-style: none;
+          text-decoration: none;
+          font-family: "Josefin Sans", sans-serif;
+        }
+
+        .wrapper .multi_color_border{
+            width: 100%;
+            height: 5px;
+            background: rgb(76,174,254,100%);
+          }
+        .wrapper .top_nav{
+            margin-top: 5px;
+            width: 100%;
+            height: 65px;
+            background: #fff;
+            padding: 0 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            
+          }    
+          
+          .wrapper .top_nav .left{
+              display: flex;
+              align-items: center;
+            }
+            .wrapper .top_nav .right ul{
+  display: flex;
+}
+
+.wrapper .top_nav .right ul li{
+  margin: 0 12px;
+}
+
+.wrapper .top_nav .left .logo {
+  font-size: 24px;
+  font-weight: bold;
+  margin-right: 25px;
+}
+.wrapper .top_nav .right ul li a{
+  display: block;
+  padding: 8px 10px;
+  color: #666666;
+  margin-top: 10px;
+}
+
+  .wrapper .bottom_nav{
+  width: 100%;
+  background: rgb(76,174,254,100%);
+  height: 45px;
+  padding: 0 50px;
+  }
+
+.wrapper .bottom_nav ul{
+  width: 100%;
+  height: 45px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.wrapper .bottom_nav ul li a{
+  color: #fff;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+    </style>
+    <title>Hello, world!</title>
+ 
+  </head>
+  <body>
+
+      <div class="wrapper">
+        <div class="multi_color_border"></div>
+        <div class="top_nav">
+          <div class="left">
+            <div class="logo"><a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/animals.png' %}" width="30" height="30" class="d-inline-block align-top" alt="logo">
+        <strong> Petadopter </strong></a></div>
+    </div>
+    <div class="right">
+      <ul>
+        {% if request.user.is_authenticated %}
+        <li><a class="nav-link active">Hello, <strong>{{ request.user.username }}</strong> </a></li>
+        <li><a class="nav-link active" href="{% url 'signout' %}"><img src="{% static 'images/exit.png' %}" width="20" height="20" class="d-inline-block align-top" alt="exit">  Log out</a></li>
+        {% else %}
+        <li><a class="nav-link active" href="{% url 'signin' %}"><img src="{% static 'images/enter.png' %}" width="20" height="20" class="d-inline-block align-top" alt="enter">  Login <span class="sr-only"></span></a></li>
+        <li><a class="nav-link active" href="{% url 'signup' %}"><img src="{% static 'images/add.png' %}" width="20" height="20" class="d-inline-block align-top" alt="add">Sign up<span class="sr-only"></span></a></li>
+        {% endif %}
+        <li><a class="nav-link active" href="{% url 'home' %}#contact"><img src="{% static 'images/phone-call (1).png' %}" width="20" height="20" class="d-inline-block align-top" alt="">Contact <span class="sr-only"></span></a></li>
+      
+      </ul>
+    </div>
+  </div>
+  <div class="bottom_nav">
+    <div class="container">
+    <ul>
+      <li><a href="{% url 'home' %}">Home </a></li>
+      <li><a href="{% url 'cats' %}">Adopt a cat</a></li>
+      <li><a href="{% url 'dogs' %}">Adopt a dog</a></li>
+      <li><a href="{% url 'birds' %}">Adopt a bird</a></li>
+    </ul>
+</div>
+</div>
+      </div>
+      
+
+
+  
+    {% block content %} {% endblock content %}
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'js/jquery.min.js' %}" ></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <!-- swiper JavaScript -->
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+  <!-- initialise Swiper -->
+  <script>
+    var swiper = new Swiper(".swiper-container", {
+      navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+          640: {
+            slidesPerView: 1,
+            spaceBetween: 50,
+          },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 40,
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 20,
+          },
+        },
+        autoplay: {
+          delay: 3500,
+          disableOnInteraction: false,
+        },
+      });
+  </script>
+  </body>
+</html>
