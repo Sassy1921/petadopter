@@ -26,22 +26,13 @@ def signup(request):
     if request.POST:
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            account = form.save(commit=False)
-            account.is_active = False
+            form.save()
+            email = form.cleaned_data.get('email')
+            raw_password=form.cleaned_data.get('password1')
+            account = authenticate(email=email,password=raw_password)
             account.save()
-            current_site = get_current_site(request)
-            subject = 'Activate your account.'
-            uid = urlsafe_base64_encode(force_bytes(account.pk))
-            token = account_activation_token.make_token(account)
-            activation_link = "{0}/activate/{1}/{2}".format(current_site, uid, token)
-            email_from = settings.EMAIL_HOST_USER
-            to_email = [form.cleaned_data.get('email')]
-            username = form.cleaned_data.get('username')
-            message = "Hello {0},\n {1}".format(account.username, activation_link)
-                          
-            send_mail(subject, message, email_from, to_email)
-            messages.success(request,'congrats')
-            redirect('home')
+            messages.success(request,'congrats, Your account was created succesfully!')
+            return redirect('home')
 
         else:
             context['registration_form'] = form
